@@ -15,6 +15,10 @@ export interface RegisterInput {
   password: string
 }
 
+export interface LogoutResponse {
+  message: string
+}
+
 export interface AuthResponse {
   user: User
 }
