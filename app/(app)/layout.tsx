@@ -1,22 +1,15 @@
+import AppLayout from '@/components/layout/AppLayout'
 import { ProtectedRoute } from '@/features/auth/components/ProtectedRoute'
 import React from 'react'
 
-export default function AppLayout({
+export default function MainLayout({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <div className="flex min-h-screen">
-      {/* Sidebar */}
-
-      <div className="flex flex-1 flex-col">
-        {/* Header */}
-
-        <main className="flex-1">
-          <ProtectedRoute>{children}</ProtectedRoute>
-        </main>
-      </div>
-    </div>
+    <ProtectedRoute>
+      <AppLayout>{children}</AppLayout>
+    </ProtectedRoute>
   )
 }

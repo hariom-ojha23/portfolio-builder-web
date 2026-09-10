@@ -1,3 +1,9 @@
+import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader'
+
 export default function DashboardPage() {
-  return <h1> Dashboard </h1>
+  return (
+    <div className="space-y-8">
+      <DashboardHeader />
+    </div>
+  )
 }
