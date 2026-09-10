@@ -21,8 +21,7 @@ const applyThemeToDocument = (newTheme: Theme) => {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Light theme is used as the initial SSR-safe value
-  const [theme, setThemeState] = useState<Theme>(THEME.LIGHT)
+  const [theme, setThemeState] = useState<Theme>(THEME.DARK)
 
   // Restore the user's previously selected theme
   useEffect(() => {
@@ -32,8 +31,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       setThemeState(selectedTheme)
       applyThemeToDocument(selectedTheme)
     } else {
-      setThemeState(THEME.LIGHT)
-      applyThemeToDocument(THEME.LIGHT)
+      setThemeState(THEME.DARK)
+      applyThemeToDocument(THEME.DARK)
     }
   }, [])
 

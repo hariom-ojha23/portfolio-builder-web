@@ -21,7 +21,7 @@ export function Sidebar() {
   const pathName = usePathname()
 
   return (
-    <ShadcnSidebar>
+    <ShadcnSidebar variant='floating' collapsible='icon'>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
