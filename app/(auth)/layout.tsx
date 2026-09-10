@@ -1,3 +1,4 @@
+import { GuestRoute } from '@/features/auth/components/GuestRoute'
 import React from 'react'
 
 export default function AuthLayout({
@@ -5,5 +6,9 @@ export default function AuthLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <main className="min-h-dvh flex justify-center items-center">{children}</main>
+  return (
+    <main className="min-h-dvh flex justify-center items-center">
+      <GuestRoute>{children}</GuestRoute>
+    </main>
+  )
 }

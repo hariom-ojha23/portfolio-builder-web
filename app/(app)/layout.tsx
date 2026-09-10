@@ -1,7 +1,8 @@
+import { ProtectedRoute } from '@/features/auth/components/ProtectedRoute'
 import React from 'react'
 
 export default function AppLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode
 }>) {
@@ -12,7 +13,9 @@ export default function AppLayout({
       <div className="flex flex-1 flex-col">
         {/* Header */}
 
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <ProtectedRoute>{children}</ProtectedRoute>
+        </main>
       </div>
     </div>
   )

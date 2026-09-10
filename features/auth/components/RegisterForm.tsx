@@ -9,10 +9,11 @@ import { RegisterInput, registerSchema } from '../schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
-import { register as registerUser } from '../api'
+import { useAuth } from '@/context/AuthContext'
 
 export default function RegisterForm() {
   const router = useRouter()
+  const { register: registerUser } = useAuth()
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [serverError, setServerError] = useState<string | null>(null)
