@@ -13,6 +13,7 @@ import {
 } from '../ui/dropdown-menu'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { useAuth } from '@/context/AuthContext'
+import ThemeToggler from '../common/ThemeToggler'
 
 export function Header() {
   const { logout } = useAuth()
@@ -30,6 +31,8 @@ export function Header() {
       </InputGroup>
 
       <div className="ml-auto flex items-center gap-1">
+        <ThemeToggler />
+
         <Button
           variant="ghost"
           size="icon"
