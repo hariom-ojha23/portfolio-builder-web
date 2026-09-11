@@ -11,17 +11,36 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem
+  SidebarMenuItem,
+  useSidebar
 } from '../ui/sidebar'
 import Link from 'next/link'
 import { HelpCircle, LayoutDashboard } from 'lucide-react'
 import { sidebarMenu } from '@/lib/sidebar-menus'
+import { useEffect } from 'react'
 
 export function Sidebar() {
   const pathName = usePathname()
+  const { setOpen } = useSidebar()
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 1279px)')
+
+    const handleResize = () => {
+      setOpen(!mediaQuery.matches)
+    }
+
+    handleResize()
+
+    mediaQuery.addEventListener('change', handleResize)
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleResize)
+    }
+  }, [setOpen])
 
   return (
-    <ShadcnSidebar variant='floating' collapsible='icon'>
+    <ShadcnSidebar variant="floating" collapsible="icon">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -37,7 +56,9 @@ export function Sidebar() {
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">Portfolio Builder</span>
 
-                <span className="truncate text-xs text-muted-foreground">Build your portfolio</span>
+                <span className="truncate text-xs text-muted-foreground">
+                  Build your portfolio
+                </span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -53,7 +74,8 @@ export function Sidebar() {
               {sidebarMenu.map((item) => {
                 const Icon = item.icon
 
-                const isActive = pathName === item.href || pathName.startsWith(`${item.href}/`)
+                const isActive =
+                  pathName === item.href || pathName.startsWith(`${item.href}/`)
 
                 return (
                   <SidebarMenuItem key={item.href}>
@@ -76,7 +98,10 @@ export function Sidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton tooltip="Help & Support" render={<Link href="/help"></Link>}>
+            <SidebarMenuButton
+              tooltip="Help & Support"
+              render={<Link href="/help"></Link>}
+            >
               <HelpCircle />
               <span>Help & Support</span>
             </SidebarMenuButton>
