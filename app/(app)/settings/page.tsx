@@ -4,7 +4,9 @@ export default function SettingsPage() {
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Settings</h1>
 
-        <p className="text-muted-foreground">Manage your account and application preferences.</p>
+        <p className="text-muted-foreground">
+          Manage your account and application preferences.
+        </p>
       </div>
     </div>
   )
