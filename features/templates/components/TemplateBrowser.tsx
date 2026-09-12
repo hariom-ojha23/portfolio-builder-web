@@ -1,16 +1,15 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import TemplateSearch from './TemplateSearch'
 import TemplateCategories from './TemplateCategories'
 import TemplateGrid from './TemplateGrid'
-import { Template, TemplateCategory } from '../types'
+import { TemplateCategory } from '../types'
 import { templates } from '../data/templates'
 
 export default function TemplateBrowser() {
   const [category, setCategory] = useState<TemplateCategory | string>('All')
   const [search, setSearch] = useState<string>('')
-  const [templateList, setTemplateList] = useState<Template[]>(templates)
 
   const filteredTemplates = useMemo(() => {
     return templates.filter((template) => {
