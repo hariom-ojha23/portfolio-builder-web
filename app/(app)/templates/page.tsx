@@ -14,7 +14,7 @@ export default function TemplatesPage() {
           </p>
         </div>
         <Item variant="outline" className="w-max bg-muted/50">
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-pink-100">
             <Palette className="size-4 text-primary" />
           </div>
 

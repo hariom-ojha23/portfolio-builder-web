@@ -6,23 +6,27 @@ import {
   ItemDescription,
   ItemTitle
 } from '@/components/ui/item'
-import { ArrowRight, FilePlus2, LayoutTemplate, UserRoundPen } from 'lucide-react'
+import { ChevronRight, FilePlus2, LayoutTemplate, UserRoundPen } from 'lucide-react'
+import Link from 'next/link'
 
 const actions = [
   {
     title: 'Create Portfolio',
     description: 'Start building a new portfolio',
-    icon: FilePlus2
+    icon: FilePlus2,
+    href: '/dashboard'
   },
   {
     title: 'Browse Templates',
     description: 'Choose portfolio template.',
-    icon: LayoutTemplate
+    icon: LayoutTemplate,
+    href: '/dashboard'
   },
   {
     title: 'Edit Profile',
     description: 'Update your personal information',
-    icon: UserRoundPen
+    icon: UserRoundPen,
+    href: '/profile'
   }
 ]
 
@@ -38,8 +42,13 @@ export default function QuickActions() {
           const Icon = action.icon
 
           return (
-            <Item key={action.title} variant="outline" className="hover:bg-muted/50">
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+            <Item
+              key={action.title}
+              variant="outline"
+              className="hover:bg-muted/50"
+              render={<Link href={action.href} />}
+            >
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-pink-100">
                 <Icon className="size-4 text-primary" />
               </div>
 
@@ -49,7 +58,7 @@ export default function QuickActions() {
               </ItemContent>
 
               <ItemActions>
-                <ArrowRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                <ChevronRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
               </ItemActions>
             </Item>
           )

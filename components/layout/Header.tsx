@@ -14,9 +14,10 @@ import {
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { useAuth } from '@/context/AuthContext'
 import ThemeToggler from '../common/ThemeToggler'
+import Link from 'next/link'
 
 export function Header() {
-  const { logout } = useAuth()
+  const { logout, user } = useAuth()
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -55,7 +56,7 @@ export function Header() {
                 </Avatar>
 
                 <div className="hidden text-left md:block">
-                  <p className="text-sm font-medium leading-none">Hariom Ojha</p>
+                  <p className="text-sm font-medium leading-none">{ user?.name }</p>
                 </div>
 
                 <ChevronDown className="hidden size-4 text-muted-foreground md:block" />
@@ -64,8 +65,13 @@ export function Header() {
           ></DropdownMenuTrigger>
 
           <DropdownMenuContent align="end" className="w-52">
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem
+              render={<Link href="/profile">Profile</Link>}
+            ></DropdownMenuItem>
+            
+            <DropdownMenuItem
+              render={<Link href="/settings">Settings</Link>}
+            ></DropdownMenuItem>
 
             <DropdownMenuSeparator />
 
