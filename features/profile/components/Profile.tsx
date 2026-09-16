@@ -6,6 +6,8 @@ import { getProfile } from '../api'
 import ProfileForm from './ProfileForm'
 import AccountOverview from './AccountOverview'
 import QuickLinks from './QuickLinks'
+import { getErrorMessage } from '@/lib/get-error-message'
+import { toast } from 'sonner'
 
 export default function Profile() {
   const [profile, setProfile] = useState<Profile | null>(null)
@@ -18,6 +20,9 @@ export default function Profile() {
 
         const data = await getProfile()
         setProfile(data)
+      } catch (error) {
+        const message = getErrorMessage(error) ?? 'Failed to get profile'
+        toast.error(message)
       } finally {
         setLoading(false)
       }

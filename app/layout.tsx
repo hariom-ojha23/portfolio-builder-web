@@ -5,8 +5,9 @@ import { cn } from '@/lib/utils'
 import { AuthProvider } from '@/context/AuthContext'
 import { ThemeProvider } from '@/context/ThemeProvider'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { Toaster } from '@/components/ui/sonner'
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'})
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -20,18 +21,26 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Portfolio Builder',
-  description: 'Create, customize, and showcase your professional portfolio.',
+  description: 'Create, customize, and showcase your professional portfolio.'
 }
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={cn("h-full", "font-sans", inter.variable)}>
+    <html lang="en" className={cn('h-full', 'font-sans', inter.variable)}>
       <AuthProvider>
         <body
-          className={cn('h-full', 'antialiased', geistSans.variable, geistMono.variable, 'font-sans', inter.variable)}
+          className={cn(
+            'h-full',
+            'antialiased',
+            geistSans.variable,
+            geistMono.variable,
+            'font-sans',
+            inter.variable
+          )}
         >
           <ThemeProvider>
             <TooltipProvider>{children}</TooltipProvider>
+            <Toaster />
           </ThemeProvider>
         </body>
       </AuthProvider>

@@ -16,6 +16,8 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Camera } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
+import { toast } from 'sonner'
+import { getErrorMessage } from '@/lib/get-error-message'
 
 type ProfileFormProps = {
   profile: Profile
@@ -43,10 +45,15 @@ export default function ProfileForm({ profile, setProfile }: ProfileFormProps) {
       setSaving(true)
 
       const result = await updateProfile({ name })
+      toast.success('Profile updated successfully')
+
       setProfile(result)
 
       // update user in auth context
       if (user) setUser({ ...user, name })
+    } catch (error) {
+      const message = getErrorMessage(error) ?? 'Failed to update. Please try again.'
+      toast.error(message)
     } finally {
       setSaving(false)
     }

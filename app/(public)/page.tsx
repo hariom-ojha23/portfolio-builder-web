@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -10,12 +11,17 @@ export default function Home() {
           </h1>
 
           <p className="mt-6 text-lg text-muted-foreground">
-            Create a professional developer portfolio using beautiful,
-            customizable templates.
+            Create a professional developer portfolio using beautiful, customizable
+            templates.
           </p>
 
           <div className="mt-8 flex justify-center gap-4">
-            <Button className="px-6 py-3" size="lg">
+            <Button
+              className="px-6 py-3"
+              size="lg"
+              nativeButton={false}
+              render={<Link href="/login" />}
+            >
               Create Portfolio
             </Button>
 
@@ -26,5 +32,5 @@ export default function Home() {
         </div>
       </section>
     </main>
-  );
+  )
 }

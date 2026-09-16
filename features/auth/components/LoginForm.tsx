@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
+import { toast } from 'sonner'
 
 export default function LoginForm() {
   const router = useRouter()
@@ -32,6 +33,7 @@ export default function LoginForm() {
       setServerError(null)
       await login(data)
 
+      toast.success('Login Successfully')
       router.push('/dashboard')
       router.refresh()
     } catch (error) {
