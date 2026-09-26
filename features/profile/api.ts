@@ -12,3 +12,13 @@ export function updateProfile(payload: UpdateProfileInput): Promise<Profile> {
     body: JSON.stringify(payload)
   })
 }
+
+export function uploadAvatar(file: File): Promise<{ url: string }> {
+  const formData = new FormData()
+  formData.append('file', file)
+
+  return apiClient<{ url: string }>('user/avatar', {
+    method: HttpMethod.POST,
+    body: formData
+  })
+}

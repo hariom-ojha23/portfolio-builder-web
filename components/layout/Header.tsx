@@ -11,10 +11,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu'
-import { Avatar, AvatarFallback } from '../ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { useAuth } from '@/context/AuthContext'
 import ThemeToggler from '../common/ThemeToggler'
 import Link from 'next/link'
+import { getInitials } from '@/lib/get-name-initials'
 
 export function Header() {
   const { logout, user } = useAuth()
@@ -50,13 +51,17 @@ export function Header() {
             render={
               <Button variant="ghost" className="ml-1 h-9 gap-2 px-2">
                 <Avatar className="size-7">
-                  <AvatarFallback className="bg-primary/10 text-xs text-primary">
-                    HO
+                  {user?.avatarUrl && (
+                    <AvatarImage src={user?.avatarUrl} alt={user?.name} />
+                  )}
+
+                  <AvatarFallback className="bg-pink-100 text-xs text-primary">
+                    { getInitials(user?.name || 'U') }
                   </AvatarFallback>
                 </Avatar>
 
                 <div className="hidden text-left md:block">
-                  <p className="text-sm font-medium leading-none">{ user?.name }</p>
+                  <p className="text-sm font-medium leading-none">{user?.name}</p>
                 </div>
 
                 <ChevronDown className="hidden size-4 text-muted-foreground md:block" />
@@ -68,7 +73,7 @@ export function Header() {
             <DropdownMenuItem
               render={<Link href="/profile">Profile</Link>}
             ></DropdownMenuItem>
-            
+
             <DropdownMenuItem
               render={<Link href="/settings">Settings</Link>}
             ></DropdownMenuItem>
