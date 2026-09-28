@@ -1,11 +1,11 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import TemplateSearch from './TemplateSearch'
 import TemplateCategories from './TemplateCategories'
 import TemplateGrid from './TemplateGrid'
 import { TemplateCategory } from '../types'
 import { templates } from '../data/templates'
+import SearchInput from '@/components/common/SearchInput'
 
 export default function TemplateBrowser() {
   const [category, setCategory] = useState<TemplateCategory | string>('All')
@@ -29,7 +29,7 @@ export default function TemplateBrowser() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4">
-        <TemplateSearch value={search} onChange={setSearch} />
+        <SearchInput value={search} onChange={setSearch} placeholder="Search templates..." />
         <TemplateCategories value={category} onChange={setCategory} />
       </div>
 

@@ -3,12 +3,13 @@
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Search } from 'lucide-react'
 
-type TemplateSearchProps = {
+type SearchInputProps = {
+  placeholder?: string
   value: string
   onChange: (value: string) => void
 }
 
-export default function TemplateSearch({ value, onChange }: TemplateSearchProps) {
+export default function SearchInput({ value, onChange, placeholder }: SearchInputProps) {
   return (
     <InputGroup>
       <InputGroupAddon>
@@ -17,7 +18,7 @@ export default function TemplateSearch({ value, onChange }: TemplateSearchProps)
 
       <InputGroupInput
         type="search"
-        placeholder="Search templates..."
+        placeholder={placeholder ?? 'Search...'}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />

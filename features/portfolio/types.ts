@@ -175,6 +175,14 @@ export interface Portfolio {
   updatedAt: string
 }
 
+export interface PortfolioSummary {
+  id: string
+  name: string
+  templateId: string
+  createdAt: string
+  updatedAt: string
+}
+
 export interface DeletePortfolioResponse {
   message: string
 }
