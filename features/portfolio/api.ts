@@ -3,6 +3,7 @@ import {
   CreatePortfolioInput,
   DeletePortfolioResponse,
   Portfolio,
+  PortfolioSummary,
   UpdatePortfolioInput
 } from './types'
 import { HttpMethod } from '@/lib/enums/http-method'
@@ -14,8 +15,8 @@ export function createPortfolio(payload: CreatePortfolioInput): Promise<Portfoli
   })
 }
 
-export function getAllPortfolio(): Promise<Portfolio[]> {
-  return apiClient<Portfolio[]>('portfolio')
+export function getAllPortfolio(): Promise<PortfolioSummary[]> {
+  return apiClient<PortfolioSummary[]>('portfolio')
 }
 
 export function getRecentPortfolios(): Promise<Portfolio[]> {

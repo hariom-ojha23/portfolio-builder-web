@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/context/AuthContext'
 import { Plus } from 'lucide-react'
+import Link from 'next/link'
 
 export function DashboardHeader() {
   const { user } = useAuth()
@@ -19,7 +20,7 @@ export function DashboardHeader() {
         </p>
       </div>
 
-      <Button>
+      <Button render={<Link href="/templates" />}>
         <Plus />
         Create New Portfolio
       </Button>

@@ -2,41 +2,22 @@
 
 import SearchInput from '@/components/common/SearchInput'
 import { PortfolioGrid } from './PortfolioGrid'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { getAllPortfolio } from '../api'
+import { PortfolioSummary } from '../types'
 
 export function PortfolioList() {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
+  const [portfolios, setPortfolios] = useState<PortfolioSummary[]>([])
 
-  const portfolios = [
-    {
-      id: '1234567896544',
-      name: 'My Developer Portfolio',
-      templateId: 'Minimal-001',
-      createdAt: '2026-09-28',
-      updatedAt: '2026-09-28'
-    },
-    {
-      id: '1234567896545',
-      name: 'My Portfolio 2.0',
-      templateId: 'Minimal-002',
-      createdAt: '2026-09-27',
-      updatedAt: '2026-09-27'
-    },
-    {
-      id: '1234567896546',
-      name: 'My Portfolio 3.0',
-      templateId: 'Minimal-003',
-      createdAt: '2026-09-27',
-      updatedAt: '2026-09-27'
-    },
-    {
-      id: '1234567896547',
-      name: 'My Portfolio 4.0',
-      templateId: 'Minimal-004',
-      createdAt: '2026-09-27',
-      updatedAt: '2026-09-27'
-    }
-  ]
+  useEffect(() => {
+    setIsLoading(true)
+    getAllPortfolio()
+      .then((res) => setPortfolios(res))
+      .catch(() => setPortfolios([]))
+      .finally(() => setIsLoading(false))
+  }, [])
 
   const filteredPortfolios = useMemo(() => {
     return portfolios.filter((portfolio) => {
@@ -46,7 +27,7 @@ export function PortfolioList() {
         !query ||
         portfolio.name.toLowerCase().includes(query) ||
         portfolio.templateId.toLowerCase().includes(query)
-        
+
       return matchedSearch
     })
   }, [search])
@@ -61,7 +42,7 @@ export function PortfolioList() {
         />
       </div>
 
-      <PortfolioGrid portfolios={filteredPortfolios} />
+      <PortfolioGrid isLoading={isLoading} portfolios={filteredPortfolios} />
     </div>
   )
 }

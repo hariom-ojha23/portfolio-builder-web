@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { PortfolioList } from '@/features/portfolio/components/PortfolioList'
 import { Plus } from 'lucide-react'
+import Link from 'next/link'
 
 export default function PortfoliosPage() {
   return (
@@ -12,7 +13,7 @@ export default function PortfoliosPage() {
           <p className="text-muted-foreground">Manage and organize your portfolios.</p>
         </div>
 
-        <Button>
+        <Button render={<Link href="/templates" />}>
           <Plus />
           Create New Portfolio
         </Button>

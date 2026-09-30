@@ -29,6 +29,10 @@ export default function Home() {
               Explore Templates
             </Button>
           </div>
+
+          <p className="mt-6 text-sm text-muted-foreground">
+            🚧 Development is in progress. More features are coming soon.
+          </p>
         </div>
       </section>
     </main>
