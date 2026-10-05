@@ -9,6 +9,7 @@ import { Template } from '../types'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 type TemplateCardProps = {
   template: Template
@@ -35,7 +36,10 @@ export default function TemplateCard({ template }: TemplateCardProps) {
         <Badge variant="secondary" className="p-2 px-3 rounded-sm">
           {template.category}
         </Badge>
-        <Button size="sm">
+        <Button
+          size="sm"
+          render={<Link href={`/portfolios/new?template=${template.id}`} />}
+        >
           Use template <ArrowRight />
         </Button>
       </CardContent>
