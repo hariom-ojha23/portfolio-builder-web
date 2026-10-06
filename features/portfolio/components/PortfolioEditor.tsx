@@ -6,23 +6,51 @@ import { defaultPortfolioConfig } from '../defaults'
 import { PortfolioConfig } from '../types'
 import { sectionMetadata } from '../data'
 import { Button } from '@/components/ui/button'
-import { Check, Circle, Eye, Save } from 'lucide-react'
+import {
+  BadgeCheck,
+  BriefcaseBusiness,
+  Code2,
+  Eye,
+  FileText,
+  FolderKanban,
+  GraduationCap,
+  HeartHandshake,
+  LucideIcon,
+  Mail,
+  MessageSquareQuote,
+  Newspaper,
+  Save,
+  Trophy,
+  Wrench
+} from 'lucide-react'
 import { Card } from '@/components/ui/card'
+import { PortfolioFormSheet } from './PortfolioFormSheet'
 
 interface PortfolioEditorProps {
   template: Template
 }
 
-type EditorSection = 'profile' | TemplateSection
-
+export const sectionIcons: Record<TemplateSection, LucideIcon> = {
+  about: FileText,
+  skills: Code2,
+  experience: BriefcaseBusiness,
+  education: GraduationCap,
+  projects: FolderKanban,
+  services: Wrench,
+  certifications: BadgeCheck,
+  achievements: Trophy,
+  publications: Newspaper,
+  volunteering: HeartHandshake,
+  testimonials: MessageSquareQuote,
+  contact: Mail
+}
 export function PortfolioEditor({ template }: PortfolioEditorProps) {
   const [config, setConfig] = useState<PortfolioConfig>(defaultPortfolioConfig)
-  const [activeSection, setActiveSection] = useState<EditorSection>('profile')
-  const [sheetOpen, setSheetOpen] = useState<Boolean>(false)
+  const [activeSection, setActiveSection] = useState<TemplateSection | null>(null)
+  const [sheetOpen, setSheetOpen] = useState<boolean>(false)
 
-  const editorSections = useMemo<{ key: EditorSection; label: string }[]>(
+  const editorSections = useMemo<{ key: TemplateSection; label: string }[]>(
     () => [
-      { key: 'profile', label: 'Profile' },
       ...template.supportedSections.map((section) => ({
         key: section,
         label: sectionMetadata[section].label
@@ -31,7 +59,7 @@ export function PortfolioEditor({ template }: PortfolioEditorProps) {
     [template.supportedSections]
   )
 
-  const handleSectionClick = (section: EditorSection) => {
+  const handleSectionClick = (section: TemplateSection) => {
     setActiveSection(section)
     setSheetOpen(true)
   }
@@ -82,11 +110,7 @@ export function PortfolioEditor({ template }: PortfolioEditorProps) {
           <div className="overflow-y-auto p-2">
             {editorSections.map((section) => {
               const active = activeSection === section.key
-
-              const isEnabled =
-                section.key === 'profile'
-                  ? true
-                  : (config.settings.sections[section.key]?.enabled ?? true)
+              const Icon = sectionIcons[section.key]
 
               return (
                 <button
@@ -94,16 +118,11 @@ export function PortfolioEditor({ template }: PortfolioEditorProps) {
                   type="button"
                   onClick={() => handleSectionClick(section.key)}
                   className={[
-                    'flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm transition-colors',
+                    'flex w-full items-center gap-3 rounded-md px-3 py-2 my-2 text-left text-sm transition-colors cursor-pointer',
                     active ? 'bg-pink-100 text-primary' : 'hover:bg-muted'
                   ].join(' ')}
                 >
-                  {isEnabled ? (
-                    <Check className="size-4 shrink-0" />
-                  ) : (
-                    <Circle className="size-4 shrink-0 text-muted-foreground" />
-                  )}
-
+                  <Icon className="size-4" />
                   <span className="truncate">{section.label}</span>
                 </button>
               )
@@ -127,24 +146,13 @@ export function PortfolioEditor({ template }: PortfolioEditorProps) {
         </Card>
       </div>
 
-      {/* Sheet will be rendered here */}
-      {/*
-        Later:
-
-        {activeSection === 'profile' && (
-          <ProfileSheet
-            open={sheetOpen}
-            onOpenChange={setSheetOpen}
-            profile={config.profile}
-            onSave={(profile) => {
-              setConfig((current) => ({
-                ...current,
-                profile,
-              }))
-            }}
-          />
-        )}
-      */}
+      <PortfolioFormSheet
+        section={activeSection}
+        open={sheetOpen}
+        onOpenChange={setSheetOpen}
+        config={config}
+        onConfigChange={setConfig}
+      />
     </div>
   )
 }
