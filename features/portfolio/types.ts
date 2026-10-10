@@ -1,3 +1,5 @@
+import { TemplateSection } from "../templates/types"
+
 export interface SiteSettings {
   title: string
   description: string
@@ -194,3 +196,5 @@ export interface CreatePortfolioInput {
 }
 
 export type UpdatePortfolioInput = Partial<CreatePortfolioInput>
+
+export type EditorSection = 'profile' | TemplateSection

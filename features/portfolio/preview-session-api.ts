@@ -1,9 +1,10 @@
 import { apiClient } from '@/lib/api-client'
 import { HttpMethod } from '@/lib/enums/http-method'
+import { PortfolioConfig } from './types'
 
 export interface CreatePreviewSessionInput {
   templateId: string
-  config: Record<string, unknown>
+  config: PortfolioConfig
 }
 
 export interface PreviewSession {
@@ -14,7 +15,7 @@ export interface PreviewSession {
 }
 
 export interface UpdatePreviewConfigInput {
-  config: Record<string, unknown>
+  config: PortfolioConfig
 }
 
 export interface UpdatePreviewConfigResponse {
@@ -25,7 +26,7 @@ export interface UpdatePreviewConfigResponse {
 
 export interface PreviewConfigResponse {
   templateId: string
-  config: Record<string, unknown>
+  config: PortfolioConfig
   expiresAt: string
 }
 

@@ -1,6 +1,7 @@
 import { TEMPLATE_CATEGORY } from '@/lib/enums/template-categories'
 
 export type TemplateSection =
+  | 'profile'
   | 'about'
   | 'skills'
   | 'experience'

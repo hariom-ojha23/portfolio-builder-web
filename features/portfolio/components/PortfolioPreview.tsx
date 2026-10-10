@@ -10,6 +10,7 @@ import {
   updatePreviewConfig,
   type PreviewSession
 } from '@/features/portfolio/preview-session-api'
+import { PortfolioConfig } from '../types'
 
 const PORTFOLIO_PREVIEW_READY = 'PORTFOLIO_PREVIEW_READY'
 const PORTFOLIO_CONFIG_UPDATE = 'PORTFOLIO_CONFIG_UPDATE'
@@ -22,7 +23,7 @@ type PreviewModes = {
 }
 
 interface PortfolioPreviewProps {
-  config: Record<string, unknown>
+  config: PortfolioConfig
   templateId: string
   templateUrl?: string
 }
@@ -145,7 +146,7 @@ export function PortfolioPreiew({
 
         setError(err instanceof Error ? err.message : 'Could not update preview')
       }
-    }, 250)
+    }, 1000)
 
     return () => {
       clearTimeout(timeout)
@@ -191,7 +192,7 @@ export function PortfolioPreiew({
   ]
 
   return (
-    <div className="relative flex min-h-[510px] min-w-0 flex-col overflow-hidden rounded-lg border">
+    <div className="relative flex min-h-127.5 min-w-0 flex-col overflow-hidden rounded-lg border">
       <div className="flex shrink-0 items-center justify-between gap-3 border-b bg-card px-3 py-2">
         <span className="text-sm font-medium">Live Preview</span>
 
@@ -223,8 +224,8 @@ export function PortfolioPreiew({
 
         <div
           className={cn(
-            'relative min-h-[510px] max-w-full shrink-0 overflow-hidden border bg-white shadow-sm transition-[width] duration-200',
-            mode === PREVIEW_MODE.MOBILE && 'min-h-[510px]'
+            'relative min-h-127.5 max-w-full shrink-0 overflow-hidden border bg-white shadow-sm transition-[width] duration-200',
+            mode === PREVIEW_MODE.MOBILE && 'min-h-127.5'
           )}
           style={{ width: previewWidths[mode] }}
         >

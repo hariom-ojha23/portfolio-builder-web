@@ -1,9 +1,10 @@
-import { PortfolioConfig } from '../types'
+import { EditorSection, PortfolioConfig } from '../types'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { TemplateSection } from '@/features/templates/types'
+import { ProfileForm } from './ProfileForm'
 
 interface PortfolioFormSheetProps {
-  section: TemplateSection | null
+  section: EditorSection | null
   open: boolean
   onOpenChange: (open: boolean) => void
   config: PortfolioConfig
@@ -24,7 +25,11 @@ export function PortfolioFormSheet({
           <SheetTitle>Edit Portfolio</SheetTitle>
         </SheetHeader>
 
-        <main className="min-w-0 flex-1 overflow-y-auto p-6">
+        <main className="min-w-0 flex-1 overflow-y-auto py-2 px-6">
+          {section === 'profile' && (
+            <ProfileForm config={config} onConfigChange={onConfigChange} />
+          )}
+
           {section === 'about' && <div>About Form</div>}
 
           {section === 'skills' && <div>Skills Form</div>}

@@ -3,7 +3,7 @@
 import { Template, TemplateSection } from '@/features/templates/types'
 import { useMemo, useState } from 'react'
 import { defaultPortfolioConfig } from '../defaults'
-import { PortfolioConfig } from '../types'
+import { EditorSection, PortfolioConfig } from '../types'
 import { sectionMetadata } from '../data'
 import { Button } from '@/components/ui/button'
 import {
@@ -21,6 +21,7 @@ import {
   Newspaper,
   Save,
   Trophy,
+  User,
   Wrench
 } from 'lucide-react'
 import { Card } from '@/components/ui/card'
@@ -31,7 +32,8 @@ interface PortfolioEditorProps {
   template: Template
 }
 
-export const sectionIcons: Record<TemplateSection, LucideIcon> = {
+export const sectionIcons: Record<EditorSection, LucideIcon> = {
+  profile: User,
   about: FileText,
   skills: Code2,
   experience: BriefcaseBusiness,
@@ -47,11 +49,15 @@ export const sectionIcons: Record<TemplateSection, LucideIcon> = {
 }
 export function PortfolioEditor({ template }: PortfolioEditorProps) {
   const [config, setConfig] = useState<PortfolioConfig>(defaultPortfolioConfig)
-  const [activeSection, setActiveSection] = useState<TemplateSection | null>(null)
+  const [activeSection, setActiveSection] = useState<EditorSection | null>(null)
   const [sheetOpen, setSheetOpen] = useState<boolean>(false)
 
-  const editorSections = useMemo<{ key: TemplateSection; label: string }[]>(
+  const editorSections = useMemo<{ key: EditorSection; label: string }[]>(
     () => [
+      {
+        key: 'profile',
+        label: sectionMetadata['profile'].label
+      },
       ...template.supportedSections.map((section) => ({
         key: section,
         label: sectionMetadata[section].label
@@ -60,7 +66,7 @@ export function PortfolioEditor({ template }: PortfolioEditorProps) {
     [template.supportedSections]
   )
 
-  const handleSectionClick = (section: TemplateSection) => {
+  const handleSectionClick = (section: EditorSection) => {
     setActiveSection(section)
     setSheetOpen(true)
   }
@@ -131,8 +137,11 @@ export function PortfolioEditor({ template }: PortfolioEditorProps) {
           </div>
         </Card>
 
-        {/* Preview */}
-          <PortfolioPreiew config={config} templateUrl='http://localhost:5173' />
+        <PortfolioPreiew
+          config={config}
+          templateId={template.id}
+          templateUrl="http://localhost:5173"
+        />
       </div>
 
       <PortfolioFormSheet
