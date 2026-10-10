@@ -36,7 +36,7 @@ export const defaultPortfolioConfig: PortfolioConfig = {
     }
   },
   profile: {
-    name: 'Jordan Avery',
+    name: 'Hari Om Ojha',
     title: 'Full Stack Developer',
     bio: 'I design and build resilient, distributed web applications and high-performance design systems.',
     location: 'India',
