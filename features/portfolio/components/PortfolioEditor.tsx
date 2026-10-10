@@ -25,6 +25,7 @@ import {
 } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { PortfolioFormSheet } from './PortfolioFormSheet'
+import { PortfolioPreiew } from './PortfolioPreview'
 
 interface PortfolioEditorProps {
   template: Template
@@ -131,19 +132,7 @@ export function PortfolioEditor({ template }: PortfolioEditorProps) {
         </Card>
 
         {/* Preview */}
-        <Card className="min-h-0 overflow-hidden">
-          <div className="flex h-full min-h-[600px] items-center justify-center bg-muted/30">
-            <div className="text-center">
-              <p className="text-lg font-medium">Portfolio Preview</p>
-
-              <p className="mt-1 text-sm text-muted-foreground">{template.name}</p>
-
-              <p className="mt-2 text-xs text-muted-foreground">
-                Live preview will be connected here.
-              </p>
-            </div>
-          </div>
-        </Card>
+          <PortfolioPreiew config={config} templateUrl='http://localhost:5173' />
       </div>
 
       <PortfolioFormSheet
